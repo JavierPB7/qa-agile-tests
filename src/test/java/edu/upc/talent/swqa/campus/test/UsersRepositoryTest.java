@@ -49,12 +49,26 @@ public interface UsersRepositoryTest {
             ),
             Set.of(new Group(1, "swqa"))
     );
-
+    UsersRepositoryState resultGetUsersByGroupAndRole = new UsersRepositoryState(
+            Set.of(
+                    new User("1", "John", "Doe", "john.doe@example.com", "student", "swqa"),
+                    new User("2", "Jane", "Doe", "jane.doe@example.com", "student", "swqa")
+            ),
+            Set.of(new Group(1, "swqa"))
+    );
     @Test
     default void testGetUsersByGroup() {
         setInitialState(defaultInitialState);
         final var actual = getRepository().getUsersByGroup("swqa");
         assertEquals(defaultInitialState.users(), new HashSet<>(actual));
+        assertExpectedFinalState(defaultInitialState);
+    }
+
+    @Test
+    default void testGetUsersByGroupAndRole() {
+        setInitialState(defaultInitialState);
+        final var actual = getRepository().getUsersByGroupAndRole("swqa", "student");
+        assertEquals(resultGetUsersByGroupAndRole.users(), new HashSet<>(actual));
         assertExpectedFinalState(defaultInitialState);
     }
 
@@ -74,7 +88,7 @@ public interface UsersRepositoryTest {
     }
 
     @Test
-    /*@Disabled("This test is not executed")*/
+    @Disabled("This test is not executed")
     default void testCreateUserFailsIfGroupDoesNotExist() {
         setInitialState(defaultInitialState);
         final var groupName = "non-existent";
