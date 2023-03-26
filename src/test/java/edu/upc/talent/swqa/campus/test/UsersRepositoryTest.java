@@ -64,6 +64,9 @@ public interface UsersRepositoryTest {
         assertExpectedFinalState(defaultInitialState);
     }
 
+    /**
+     * Method has no tests in the UsersRepository
+     */
     @Test
     default void testGetUsersByGroupAndRole() {
         setInitialState(defaultInitialState);

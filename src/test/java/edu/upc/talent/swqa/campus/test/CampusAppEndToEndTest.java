@@ -42,6 +42,6 @@ public final class CampusAppEndToEndTest extends DatabaseBackedTest {
 
     @Test
     public void testCreateUser() {
-        //TODO
+        app.createUser("Javi", "Palomino", "jpaloino@yopmail.com", "student", "swqa");
     }
 }
